@@ -136,17 +136,67 @@ Impact : Creates a P2 ticket routed to 'it-service-desk-tier2'.
 Assistant: Done. Ticket TCK-F62498 created (priority P2, queue it-service-desk-tier2).
 ```
 
-### 3. Edited arguments (PASTE YOUR OWN TRANSCRIPT HERE)
+### 3. Edited arguments (human changes priority before execution)
 
 ```
-(paste the terminal output of an action where you typed "e" and changed priority to P1)
+You: Open a P3 ticket: laptop screen flickering for the sales team
+  -> [Supervisor] intent=action
+  -> [Action Planner]
+
+Assistant: I've prepared 'create_ticket'. Awaiting your approval.
+
+============================================================
+  [Awaiting Approval]  ACTION PAUSED FOR HUMAN REVIEW
+============================================================
+Tool   : create_ticket
+Args   :
+   summary = Laptop screen flickering for sales team
+   priority = P3
+   impact = Not specified
+Impact : Creates a P3 ticket routed to 'it-service-desk-tier1'.
+============================================================
+[a]pprove / [e]dit args / [r]eject: e
+  summary [Laptop screen flickering for sales team]:
+  priority [P3]: p1
+  impact [Not specified]:
+  Invalid: priority: Input should be 'P1', 'P2', 'P3' or 'P4'. Try again.
+[a]pprove / [e]dit args / [r]eject: e
+  summary [Laptop screen flickering for sales team]:
+  priority [P3]: P1
+  impact [Not specified]:
+  -> [Tool Executor]
+
+Assistant: Done. Ticket TCK-0209F1 created (priority P1, queue it-incident-oncall).
 ```
 
-### 4. Rejected action (PASTE YOUR OWN TRANSCRIPT HERE)
+The first edit attempt was blocked by Pydantic validation (invalid priority value). The corrected edit was written to the graph state with `update_state`, and the ticket was created as P1 and re-routed to `it-incident-oncall`.
+
+### 4. Rejected action (production restart)
 
 ```
-(paste the terminal output of an action where you typed "r")
+You: Restart the payments service in production because it is hung and not responding
+  -> [Supervisor] intent=action
+  -> [Action Planner]
+
+Assistant: I've prepared 'request_server_restart'. Awaiting your approval.
+
+============================================================
+  [Awaiting Approval]  ACTION PAUSED FOR HUMAN REVIEW
+============================================================
+Tool   : request_server_restart
+Args   :
+   service = payments
+   environment = production
+   reason = hung and not responding
+Impact : Requests restart of 'payments' in production. May drop active sessions; explicit human approval required (Runbook s3, Security Policy s4).
+============================================================
+[a]pprove / [e]dit args / [r]eject: r
+  -> [Tool Executor]
+
+Assistant: No problem, I've cancelled that action. Nothing was changed.
 ```
+
+The rejected restart was never executed and does not appear in `actions_log.json`.
 
 ## Design notes
 
