@@ -1,0 +1,38 @@
+[
+  {
+    "action": "create_ticket",
+    "ticket_id": "TCK-F62498",
+    "summary": "VPN down for finance team",
+    "priority": "P2",
+    "queue": "it-service-desk-tier2",
+    "impact": "Not specified",
+    "timestamp": "2026-11-24T08:54:01+00:00"
+  },
+  {
+    "action": "create_ticket",
+    "ticket_id": "TCK-D10FD1",
+    "summary": "Printer broken on floor 2",
+    "priority": "P3",
+    "queue": "it-service-desk-tier1",
+    "impact": "Not specified",
+    "timestamp": "2026-11-24T08:59:51+00:00"
+  },
+  {
+    "action": "create_ticket",
+    "ticket_id": "TCK-899F7A",
+    "summary": "Printer broken on floor 2",
+    "priority": "P3",
+    "queue": "it-service-desk-tier1",
+    "impact": "Not specified",
+    "timestamp": "2026-11-24T09:02:32+00:00"
+  },
+  {
+    "action": "create_ticket",
+    "ticket_id": "TCK-0209F1",
+    "summary": "Laptop screen flickering for sales team",
+    "priority": "P1",
+    "queue": "it-incident-oncall",
+    "impact": "Not specified",
+    "timestamp": "2026-11-24T09:06:40+00:00"
+  }
+]
